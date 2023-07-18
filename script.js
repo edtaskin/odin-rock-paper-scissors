@@ -12,6 +12,7 @@ function playRound(cpuChoice, playerChoice) {
 
     if(cpuChoice === playerChoice) {
         playerWins = null; // Tie
+        console.log("No one wins the round: TIE");
         return playerWins;
     }
 
@@ -25,6 +26,9 @@ function playRound(cpuChoice, playerChoice) {
         case SCISSORS:
             playerWins = playerChoice === ROCK;
     }
+
+    console.log(`${playerWins ? "PLAYER" : "CPU"} wins the round: ${playerWins ? playerChoice : cpuChoice} beats ${playerWins ? cpuChoice : playerChoice}`);
+    
     return playerWins;
 }
 
@@ -45,6 +49,7 @@ function game() {
     let cpuScore = 0;
     let playerScore = 0;
     while (cpuScore < 3 && playerScore < 3) {
+        console.log("-----------------")
         let cpuChoice = getComputerChoice();
         let playerChoice = getPlayerChoice();
         if (playerChoice === null) {
@@ -63,7 +68,7 @@ function game() {
                 cpuScore++;
                 break;
         }
-        
+        console.log(`PLAYER ${playerScore} : ${cpuScore} CPU`);
     }
 
     if (playerScore === 3) 
@@ -74,8 +79,10 @@ function game() {
         console.log("!!! IT'S A TIE!!!");
     
     let playAgain = prompt("Do you want a rematch? (Yes/No)");
-    if (playAgain)
+    if (playAgain != null && playAgain.toLowerCase() == "yes")
         game();
+    else
+        console.log("GAME OVER");
 }
 
 game();
