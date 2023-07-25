@@ -13,6 +13,8 @@ function playRound(cpuChoice, playerChoice) {
     let playerWins;
     if(cpuChoice === playerChoice) {
         playerWins = null; // Tie
+        displayScore(playerScore, cpuScore);
+        displayRoundInfo(playerWins, playerChoice, cpuChoice);
         return playerWins;
     }
 
