@@ -39,11 +39,12 @@ function playRound(cpuChoice, playerChoice) {
     return playerWins;
 }
 
-const buttons = document.querySelectorAll('.game-area .bt');
-
-
+const buttons = document.querySelectorAll('.game-area .bt.weapon');
 buttons.forEach((button) => button.addEventListener('click', (e) => playRound(getComputerChoice(), e.currentTarget.getAttribute('id'))));
 
+const playAgainButton = document.querySelector(".bt#play-again");
+playAgainButton.addEventListener('click', () => resetComponents());
+playAgainButton.disabled = true;
 
 let playerScore = 0, cpuScore = 0;
 const scoreDiv = document.querySelector('div.score-area');
@@ -76,13 +77,7 @@ function endGame() {
         gameOverDiv.textContent = "Ohhh nooo! YOU LOSE!!!!";
     }
     buttons.forEach(button => button.disabled = true);
-    const rematch = prompt("Wanna play again? (Yes/No)");
-    if (rematch === null || rematch.toLowerCase() == "no") {
-        return;
-    } 
-    else {
-        resetComponents();
-    }
+    playAgainButton.disabled = false;
 }
 
 function resetComponents() {
@@ -91,4 +86,5 @@ function resetComponents() {
     infoDiv.textContent = "Choose your weapon to start.";
     gameOverDiv.textContent = "";
     buttons.forEach(button => button.disabled = false);
+    playAgainButton.disabled = true;
 }
