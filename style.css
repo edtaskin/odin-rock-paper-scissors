@@ -25,3 +25,8 @@ body {
 .game-over-msg {
     font-size: 25px;
 }
+
+button:hover {
+    background-color: orange;
+    transition: 0.5s;
+}
