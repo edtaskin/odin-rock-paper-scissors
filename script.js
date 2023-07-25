@@ -45,6 +45,10 @@ function getPlayerChoice() {
     return playerChoice;
 }
 
+const rockButton = document.querySelector('.bt#rock');
+console.log(rockButton);
+
+/*
 function game() {
     let cpuScore = 0;
     let playerScore = 0;
@@ -85,4 +89,6 @@ function game() {
         console.log("GAME OVER");
 }
 
+
 game();
+*/
