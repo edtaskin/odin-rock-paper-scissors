@@ -1,6 +1,8 @@
 const ROCK = "rock";
 const PAPER = "paper";
 const SCISSORS = "scissors";
+const WINNING_SCORE = 5;
+
 
 function getComputerChoice() {
     let randomIndex = Math.floor(Math.random() * 3);
@@ -30,21 +32,17 @@ function playRound(cpuChoice, playerChoice) {
 
     displayScore(playerScore, cpuScore);
     displayRoundInfo(playerScore, playerChoice, cpuChoice);
-    //console.log(`${playerWins ? "PLAYER" : "CPU"} wins the round: ${playerWins ? playerChoice : cpuChoice} beats ${playerWins ? cpuChoice : playerChoice}`);
-    //console.log("-------------\n");
+
+    if (checkGameOver())
+        endGame();
 
     return playerWins;
 }
 
-const rockButton = document.querySelector('.bt#rock');
-const paperButton = document.querySelector('.bt#paper');
-const scissorsButton = document.querySelector('.bt#scissors');
+const buttons = document.querySelectorAll('.game-area .bt');
 
-const buttons = [rockButton, paperButton, scissorsButton];
 
-const receiveUserChoice = e => playRound(getComputerChoice(), e.target.getAttribute('id'));  
-
-buttons.forEach((button) => button.addEventListener('click', receiveUserChoice));
+buttons.forEach((button) => button.addEventListener('click', (e) => playRound(getComputerChoice(), e.target.getAttribute('id'))));
 
 
 let playerScore = 0, cpuScore = 0;
@@ -62,4 +60,35 @@ function displayRoundInfo(playerWins, playerChoice, cpuChoice) {
         infoDiv.textContent += "\nNo one wins the round: TIE";
     else
         infoDiv.textContent += `\n${playerWins ? "PLAYER" : "CPU"} wins the round: ${playerWins ? playerChoice : cpuChoice} beats ${playerWins ? cpuChoice : playerChoice}`;
+}
+
+function checkGameOver() {
+    return playerScore === WINNING_SCORE || cpuScore === WINNING_SCORE;
+}
+
+const gameOverDiv = document.querySelector('.game-over-msg');
+
+function endGame() {
+    if (playerScore === WINNING_SCORE) {
+        gameOverDiv.textContent = "YOU WIN!!!! Congrats!";
+    }
+    else if (cpuScore === WINNING_SCORE) {
+        gameOverDiv.textContent = "Ohhh nooo! YOU LOSE!!!!";
+    }
+    buttons.forEach(button => button.disabled = true);
+    const rematch = prompt("Wanna play again? (Yes/No)");
+    if (rematch === null || rematch.toLowerCase() == "no") {
+        return;
+    } 
+    else {
+        resetComponents();
+    }
+}
+
+function resetComponents() {
+    playerScore = cpuScore = 0;
+    scoreDiv.textContent = "Player 0 : 0 CPU";
+    infoDiv.textContent = "Choose your weapon to start.";
+    gameOverDiv.textContent = "";
+    buttons.forEach(button => button.disabled = false);
 }
