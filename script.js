@@ -26,9 +26,12 @@ function playRound(cpuChoice, playerChoice) {
         case SCISSORS:
             playerWins = playerChoice === ROCK;
     }
+    playerWins ? playerScore++ : cpuScore++;
 
-    console.log(`${playerWins ? "PLAYER" : "CPU"} wins the round: ${playerWins ? playerChoice : cpuChoice} beats ${playerWins ? cpuChoice : playerChoice}`);
-    console.log("-------------\n");
+    displayScore(playerScore, cpuScore);
+    displayRoundInfo(playerScore, playerChoice, cpuChoice);
+    //console.log(`${playerWins ? "PLAYER" : "CPU"} wins the round: ${playerWins ? playerChoice : cpuChoice} beats ${playerWins ? cpuChoice : playerChoice}`);
+    //console.log("-------------\n");
 
     return playerWins;
 }
@@ -44,47 +47,19 @@ const receiveUserChoice = e => playRound(getComputerChoice(), e.target.getAttrib
 buttons.forEach((button) => button.addEventListener('click', receiveUserChoice));
 
 
-/*
-function game() {
-    let cpuScore = 0;
-    let playerScore = 0;
-    while (cpuScore < 3 && playerScore < 3) {
-        console.log("-----------------")
-        let cpuChoice = getComputerChoice();
-        let playerChoice = getPlayerChoice();
-        if (playerChoice === null) {
-            console.log("Game cancelled.");
-            return;
-        }
-        console.log(`Player: ${playerChoice}, CPU: ${cpuChoice}`);
-        let playerWinsRound = playRound(cpuChoice, playerChoice);
-        switch (playerWinsRound) {
-            case null:
-                break;
-            case true:
-                playerScore++;
-                break;
-            case false:
-                cpuScore++;
-                break;
-        }
-        console.log(`PLAYER ${playerScore} : ${cpuScore} CPU`);
-    }
+let playerScore = 0, cpuScore = 0;
+const scoreDiv = document.querySelector('div.score-area');
 
-    if (playerScore === 3) 
-        console.log("!!!YOU WIN!!! Congrats!");
-    else if (cpuScore === 3)
-        console.log(":( YOU LOSE :( Too bad!");
-    else 
-        console.log("!!! IT'S A TIE!!!");
-    
-    let playAgain = prompt("Do you want a rematch? (Yes/No)");
-    if (playAgain != null && playAgain.toLowerCase() == "yes")
-        game();
-    else
-        console.log("GAME OVER");
+function displayScore(playerScore, cpuScore) {
+    scoreDiv.textContent = `Player ${playerScore} : ${cpuScore} CPU`;
 }
 
+const infoDiv = document.querySelector('div.info-area');
 
-game();
-*/
+function displayRoundInfo(playerWins, playerChoice, cpuChoice) {
+    infoDiv.textContent = `Player: ${playerChoice}, CPU: ${cpuChoice}`;
+    if (playerWins === null) 
+        infoDiv.textContent += "\nNo one wins the round: TIE";
+    else
+        infoDiv.textContent += `\n${playerWins ? "PLAYER" : "CPU"} wins the round: ${playerWins ? playerChoice : cpuChoice} beats ${playerWins ? cpuChoice : playerChoice}`;
+}
