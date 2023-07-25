@@ -21,6 +21,9 @@ body {
     font-size: 30px;
 }
 
+.info-area {
+    white-space: pre-line;
+}
 
 .game-over-msg {
     font-size: 25px;

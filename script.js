@@ -11,10 +11,8 @@ function getComputerChoice() {
 
 function playRound(cpuChoice, playerChoice) {
     let playerWins;
-    console.log(`Player: ${playerChoice}, CPU: ${cpuChoice}`);
     if(cpuChoice === playerChoice) {
         playerWins = null; // Tie
-        console.log("No one wins the round: TIE");
         return playerWins;
     }
 
@@ -42,7 +40,7 @@ function playRound(cpuChoice, playerChoice) {
 const buttons = document.querySelectorAll('.game-area .bt');
 
 
-buttons.forEach((button) => button.addEventListener('click', (e) => playRound(getComputerChoice(), e.target.getAttribute('id'))));
+buttons.forEach((button) => button.addEventListener('click', (e) => playRound(getComputerChoice(), e.currentTarget.getAttribute('id'))));
 
 
 let playerScore = 0, cpuScore = 0;
