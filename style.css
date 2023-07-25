@@ -1,0 +1,27 @@
+body {
+    min-height: 100%;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.buttons-area {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.score-area {
+    font-size: 30px;
+}
+
+
+.game-over-msg {
+    font-size: 25px;
+}
