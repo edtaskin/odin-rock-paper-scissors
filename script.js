@@ -9,7 +9,7 @@ function getComputerChoice() {
 
 function playRound(cpuChoice, playerChoice) {
     let playerWins;
-
+    console.log(`Player: ${playerChoice}, CPU: ${cpuChoice}`);
     if(cpuChoice === playerChoice) {
         playerWins = null; // Tie
         console.log("No one wins the round: TIE");
@@ -28,25 +28,21 @@ function playRound(cpuChoice, playerChoice) {
     }
 
     console.log(`${playerWins ? "PLAYER" : "CPU"} wins the round: ${playerWins ? playerChoice : cpuChoice} beats ${playerWins ? cpuChoice : playerChoice}`);
-    
+    console.log("-------------\n");
+
     return playerWins;
 }
 
-function getPlayerChoice() {
-    let playerChoice = prompt("Choose from Rock / Paper / Scissors: ");
-
-    if (playerChoice === null) return null; // Cancel button pressed 
-    playerChoice = playerChoice.toLowerCase();
-
-    while (playerChoice !== ROCK && playerChoice !== PAPER && playerChoice !== SCISSORS) {
-        playerChoice = prompt("Unknown option.\nChoose from Rock / Paper / Scissors: ");
-    }
-
-    return playerChoice;
-}
-
 const rockButton = document.querySelector('.bt#rock');
-console.log(rockButton);
+const paperButton = document.querySelector('.bt#paper');
+const scissorsButton = document.querySelector('.bt#scissors');
+
+const buttons = [rockButton, paperButton, scissorsButton];
+
+const receiveUserChoice = e => playRound(getComputerChoice(), e.target.getAttribute('id'));  
+
+buttons.forEach((button) => button.addEventListener('click', receiveUserChoice));
+
 
 /*
 function game() {
