@@ -3,11 +3,12 @@ body {
 }
 
 .game-area {
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 50px;
 }
 
 .buttons-area {
@@ -18,18 +19,31 @@ body {
 }
 
 .score-area {
-    font-size: 30px;
+    font-size: 50px;
 }
 
 .info-area {
     white-space: pre-line;
+    font-size: 25px;
+}
+
+.game-over-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .game-over-msg {
-    font-size: 25px;
+    font-size: 30px;
 }
 
 button:hover {
     background-color: orange;
     transition: 0.5s;
+}
+
+button#play-again {
+    max-width: 200px;
+    font-size: 20px;
 }
